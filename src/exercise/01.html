@@ -30,9 +30,9 @@
     <div id="root"></div>
     <script type="module">
       const rootElement = document.getElementById('root')
-      const div = document.createElement('div')
-      div.textContent = 'Hello World'
-      rootElement.append(div)
+      const element = document.createElement('div')
+      element.textContent = new Date()
+      rootElement.append(element)
     </script>
   </body>
 </html>
