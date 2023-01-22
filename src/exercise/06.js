@@ -5,18 +5,29 @@ import * as React from 'react'
 
 function UsernameForm({onSubmitUsername}) {
   const usernameRef = React.useRef()
+  const [username, setUsername] = React.useState('')
 
   function handleSubmit(event) {
     event.preventDefault()
-    const username = usernameRef.current.value
-    onSubmitUsername(username)
+    const value = usernameRef.current.value
+    onSubmitUsername(value)
+  }
+
+  function handleChange(event) {
+    setUsername(event.target.value.toLowerCase())
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor='usernameInput'>Username:</label>
-        <input type="text" id='usernameInput' ref={usernameRef} />
+        <input
+          type="text"
+          id='usernameInput'
+          ref={usernameRef}
+          onChange={handleChange}
+          value={username}
+        />
       </div>
       <button type="submit">Submit</button>
     </form>
