@@ -6,6 +6,7 @@ import * as React from 'react'
 function UsernameForm({onSubmitUsername}) {
   const usernameRef = React.useRef()
   const [username, setUsername] = React.useState('')
+  const [error, setError] = React.useState(null)
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -14,7 +15,9 @@ function UsernameForm({onSubmitUsername}) {
   }
 
   function handleChange(event) {
-    setUsername(event.target.value.toLowerCase())
+    const { value } = event.target
+    setUsername(value)
+    setError(value === value.toLowerCase() ? null : 'Username must be in lowercase')
   }
 
   return (
@@ -28,8 +31,9 @@ function UsernameForm({onSubmitUsername}) {
           onChange={handleChange}
           value={username}
         />
+        { error && <div style={{ color: 'red' }}>{error}</div>}
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" disabled={Boolean(error)}>Submit</button>
     </form>
   )
 }
